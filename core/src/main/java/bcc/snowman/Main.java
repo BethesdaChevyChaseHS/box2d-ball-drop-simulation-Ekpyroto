@@ -44,8 +44,8 @@ public class Main extends ApplicationAdapter {
     private final float SPACING_X = TOTAL_WIDTH / (ROW_NUM - 1 + BALLS_IN_FIRST_ROW - 1);
     private final float SPACING_Y = PEG_AREA_HEIGHT / (ROW_NUM - 1);
     private final float BALL_SIZE = SPACING_Y/5;
-    private final float BOUNCINESS = .05f;
-    private final float GRAVITY = 10f;
+    private final float BOUNCINESS = .2f;
+    private final float GRAVITY = 5f;
 
     public void create() {
         world = new World(new Vector2(0, -GRAVITY), true);
@@ -104,6 +104,14 @@ public class Main extends ApplicationAdapter {
 
         renderShapes(droppedBalls);
         renderShapes(pegs);
+
+
+
+        //I don't know where else to put this
+
+        //for(Body ball : droppedBalls){
+       //     if(ball.position)
+       // }
     }
 
     // method to render arraylist of pegs
@@ -138,7 +146,13 @@ public class Main extends ApplicationAdapter {
     //FOR YOU TO IMPLEMENT
     private void addAllPegs() {
         //sample addPeg call
-        addPeg(PEG_CENTER_X, PEG_AREA_START, BALL_SIZE);
+        //addPeg(PEG_CENTER_X, PEG_AREA_START, BALL_SIZE);
+        for(int row =0; row<ROW_NUM; row++){
+            float StartPos = 0.5f*(WIDTH-((row+BALLS_IN_FIRST_ROW)*SPACING_X));
+            for(int i = 0; i<row+BALLS_IN_FIRST_ROW; i++){
+                addPeg(StartPos+i*SPACING_X,PEG_AREA_START-row*SPACING_Y,BALL_SIZE);
+            }
+        }
 
         // PLEASE USE LOOPS, DON'T MANUALLY PLACE EACH PEG
     }
